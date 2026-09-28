@@ -1,6 +1,6 @@
 # hsxa-test：自然语言转 FOFA 检索
 
-比赛方的目标与提交规范见 [docs/README.md](docs/README.md)，那是原始材料，只读。
+面试题的目标与提交规范见 [docs/README.md](docs/README.md)，那是原始材料，只读。
 这份 README 记的是我自己的解题思路：怎么理解题目、怎么选型、资料怎么收、
 哪些事还没做完。
 
@@ -23,7 +23,7 @@
 
 ### 二、读完 README 改做 Skill
 
-通读 [docs/README.md](docs/README.md) 之后发现比赛方写得很清楚：不是让做一个 Agent，
+通读 [docs/README.md](docs/README.md) 之后发现题目要求写得很清楚：不是让做一个 Agent，
 而是"使用自己的 Agent、Skill、模型、规则或其他组合方案"，只按最终答案评分，
 不比技术路线。既然 Skill 这条路投入产出更高，而时间有限，就决定**先做 Skill，
 Agent 往后放**。
@@ -45,7 +45,7 @@ Skill 的形态也正好对症：把"哪个说法对应哪个字段、什么情�
 
 | 目录 | 作用 |
 | --- | --- |
-| `docs/` | 比赛方原始材料：题目、答题模板、参赛包、README。**只读** |
+| `docs/` | 面试题原始材料：题目文档、答题模板、答题包、README。**只读** |
 | `rules/` | 随时更新的 FOFA 语法规范，字段表以 `3.txt` 为最高权重。**只读** |
 | `test/` | 预留试验区，测试文件和结果都放这里 |
 | `skill/` | Skill 本体：判据文档、脚本、答卷、回归套件 |
@@ -125,7 +125,7 @@ eino 骨架已经跑通：`go build` / `go vet` / `go test` 全过，`AGENT_ENAB
 ## 现在到哪一步了
 
 - Skill 已交付，首推 `origin/main`；安装方式与调用说明见 [skill/SKILL.md](skill/SKILL.md)。
-- 本参赛包答卷在 `skill/answers/答案.json`：100 题全部有答案，95 条可转换、
+- 答卷在 `skill/answers/答案.json`：100 题全部有答案，95 条可转换、
   5 条固定答案、27 条中低置信度待人工抽查（清单 `skill/tests/review.md`）。
 - 回归入口：`python3 skill/tests/regress.py`，两组 selftest 加三份交付物
   逐字节可复现校验，全绿才算完成。
