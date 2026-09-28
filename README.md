@@ -129,3 +129,10 @@ eino 骨架已经跑通：`go build` / `go vet` / `go test` 全过，`AGENT_ENAB
   5 条固定答案、27 条中低置信度待人工抽查（清单 `skill/tests/review.md`）。
 - 回归入口：`python3 skill/tests/regress.py`，两组 selftest 加三份交付物
   逐字节可复现校验，全绿才算完成。
+
+## 验证语句
+
+Skill 装好之后，在客户端里 @ 一下就能直接驱动，不需要记任何命令。
+这次 `test/答案.json` 就是发出下面这一行之后，沿着 Skill 的三步流程跑出来的：
+
+![在客户端 @ 调用 fofa-query-builder Skill 并指定答卷输出位置](assets/fofa-skill-invocation.png)
