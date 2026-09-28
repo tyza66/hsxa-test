@@ -130,7 +130,8 @@ def check_doc_sync(failures):
 
 def check_answer_schema(answer_path, failures):
     """对答卷跑提交前校验。"""
-    pkg = "pkg-08e82c8d"
+    # 包号同样以 docs/参赛包.txt 为准，写死会在换包后让校验假失败
+    pkg = paths.package_id() or "pkg-08e82c8d"
     code, out, err = _run(
         "validate.py", answer_path,
         "--题目", QUESTIONS,

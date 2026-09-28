@@ -50,7 +50,7 @@ Unique IP View 字段与其他语法混用这类低级错误要在提交前拦�
 ## 自检
 
 ```bash
-python3 skill/scripts/validate.py skill/answers/答案.json --参赛包编号 pkg-08e82c8d
+python3 skill/scripts/validate.py skill/answers/答案.json
 ```
 
 输出 `结果: 通过` 才算数。任何一条拒绝原因都对应本文的一节，按图索骥改完重跑。

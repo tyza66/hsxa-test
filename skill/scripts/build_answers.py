@@ -16,6 +16,7 @@ r"""把 docs/题目.txt 的 100 道自然语言需求映射成 FOFA Query 并生
 
     python3 build_answers.py                 # 按默认路径生成
     python3 build_answers.py --题目 <路径>    # 指定题目文件
+    python3 build_answers.py --输出 <路径>    # 指定答卷输出位置
 """
 
 from __future__ import annotations
@@ -31,7 +32,15 @@ import lookup  # noqa: E402
 import paths  # noqa: E402
 
 PLAYER = "tyza66"
-PKG = "pkg-08e82c8d"
+
+#: 参赛包编号的兜底值。正常情况下以 docs/参赛包.txt 首行为准（见 load_pkg），
+#: 官方每次下载都会换发新包号，把包号写死会在换包后被 validate.py 拒收。
+PKG_FALLBACK = "pkg-08e82c8d"
+
+
+def load_pkg():
+    """读取参赛包编号：优先 docs/参赛包.txt 首行，读不到才回落到内置值。"""
+    return paths.package_id() or PKG_FALLBACK
 
 # 复用频率高的取值
 AMAZON_AWS = "Amazon AWS"
@@ -499,7 +508,7 @@ def build_answer_document():
     """按 docs/README.md 的格式生成答卷对象。"""
     return {
         "选手名称": PLAYER,
-        "参赛包编号": PKG,
+        "参赛包编号": load_pkg(),
         "答案": [{"题号": qid, "查询语句": A[qid][0]} for qid in QUESTION_ORDER],
     }
 

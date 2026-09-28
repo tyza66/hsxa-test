@@ -14,6 +14,9 @@ r"""答案文件校验器（依据 docs/README.md 与 docs/答题模板.txt 的�
 
     python3 validate.py <答案.json> [--题目 docs/题目.txt] [--参赛包编号 pkg-xxx]
 
+不传 `--参赛包编号` 时，默认按 `docs/参赛包.txt` 首行的包号校验；
+换答题包后无需改脚本或文档，文件是唯一口径。
+
 退出码：0 通过；1 拒绝；2 用法或读取错误。
 """
 
@@ -203,7 +206,8 @@ def main(argv=None):
     parser.add_argument("answer", help="答案 JSON 路径")
     parser.add_argument("--题目", default=paths.questions_path(),
                         help="题目 JSON 路径（默认工作区 docs/题目.txt，FOFA_WORKSPACE 可改）")
-    parser.add_argument("--参赛包编号", default=None, help="期望的参赛包编号")
+    parser.add_argument("--参赛包编号", default=paths.package_id(),
+                        help="期望的参赛包编号（默认工作区 docs/参赛包.txt 首行，FOFA_WORKSPACE 可改）")
     args = parser.parse_args(argv)
 
     ok, problems, info = validate(args.answer, args.题目, args.参赛包编号)

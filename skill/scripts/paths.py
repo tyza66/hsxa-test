@@ -79,6 +79,31 @@ def rules_path():
     return os.path.join("rules", "3.txt")
 
 
+def package_path():
+    """docs/参赛包.txt，记录答题包编号与发放时间。"""
+    workspace = find_workspace()
+    if workspace:
+        return os.path.join(workspace, "docs", "参赛包.txt")
+    return os.path.join("docs", "参赛包.txt")
+
+
+def package_id():
+    """参赛包编号，取 docs/参赛包.txt 首行非空内容；读不到返回 None。
+
+    官方说明每次下载都会重新抽题、换发新包号，所以包号必须以文件为准，
+    任何脚本都不该把包号写死。
+    """
+    try:
+        with open(package_path(), encoding="utf-8-sig") as fh:
+            for line in fh:
+                line = line.strip()
+                if line:
+                    return line
+    except OSError:
+        pass
+    return None
+
+
 def tests_dir():
     """golden、快照等回归基线所在目录。"""
     return os.path.join(skill_root(), "tests")

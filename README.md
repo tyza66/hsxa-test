@@ -127,6 +127,8 @@ eino 骨架已经跑通：`go build` / `go vet` / `go test` 全过，`AGENT_ENAB
 - Skill 已交付，首推 `origin/main`；安装方式与调用说明见 [skill/SKILL.md](skill/SKILL.md)。
 - 答卷在 `skill/answers/答案.json`：100 题全部有答案，95 条可转换、
   5 条固定答案、27 条中低置信度待人工抽查（清单 `skill/tests/review.md`）。
+- 本次提交的答卷在 `test/答案.json`，与仓库内的回归基线
+  `skill/answers/答案.json` 逐字节一致，可直接拿去提交。
 - 回归入口：`python3 skill/tests/regress.py`，两组 selftest 加三份交付物
   逐字节可复现校验，全绿才算完成。
 

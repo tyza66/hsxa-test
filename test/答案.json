@@ -1,0 +1,406 @@
+{
+  "选手名称": "tyza66",
+  "参赛包编号": "pkg-08e82c8d",
+  "答案": [
+    {
+      "题号": "M001-S009",
+      "查询语句": "ip=\"20.247.40.92\""
+    },
+    {
+      "题号": "M002-S004",
+      "查询语句": "ip=\"124.255.254.0/24\""
+    },
+    {
+      "题号": "M003-S002",
+      "查询语句": "domain=\"zendesk.com\""
+    },
+    {
+      "题号": "M004-S003",
+      "查询语句": "host=\"www.amazon.com\""
+    },
+    {
+      "题号": "M005-S004",
+      "查询语句": "domain*=\"*vpn*\""
+    },
+    {
+      "题号": "M006-S002",
+      "查询语句": "country=\"GB\""
+    },
+    {
+      "题号": "M007-S007",
+      "查询语句": "(country=\"KR\" && region=\"Gangwon\")"
+    },
+    {
+      "题号": "M008-S009",
+      "查询语句": "(country=\"DE\" && region=\"Bavaria\" && city=\"Munich\")"
+    },
+    {
+      "题号": "M009-S008",
+      "查询语句": "asn=\"4134\""
+    },
+    {
+      "题号": "M010-S009",
+      "查询语句": "(country=\"NL\" && cloud_name=\"Amazon AWS\")"
+    },
+    {
+      "题号": "M011-S005",
+      "查询语句": "(region=\"Hebei\" && cloud_name=\"Huawei Cloud\")"
+    },
+    {
+      "题号": "M012-S009",
+      "查询语句": "port=\"3000\""
+    },
+    {
+      "题号": "M013-S003",
+      "查询语句": "(country!=\"CN\" && after=\"2026-08-01\" && (title=\"Jenkins\" || body=\"jenkins\"))"
+    },
+    {
+      "题号": "M014-S002",
+      "查询语句": "(country=\"CN\" && protocol=\"dns\")"
+    },
+    {
+      "题号": "M015-S001",
+      "查询语句": "protocol=\"socks5\""
+    },
+    {
+      "题号": "M016-S006",
+      "查询语句": "(protocol=\"ssh\" && port=\"22022\")"
+    },
+    {
+      "题号": "M017-S001",
+      "查询语句": "base_protocol=\"tcp\""
+    },
+    {
+      "题号": "M018-S006",
+      "查询语句": "protocol=\"snmp\""
+    },
+    {
+      "题号": "M019-S010",
+      "查询语句": "(country=\"US\" && protocol=\"memcached\")"
+    },
+    {
+      "题号": "M020-S005",
+      "查询语句": "(protocol=\"ftp\" && base_protocol=\"tcp\")"
+    },
+    {
+      "题号": "M021-S010",
+      "查询语句": "(protocol=\"ssh\" && banner=\"OpenSSH_10.4\")"
+    },
+    {
+      "题号": "M022-S007",
+      "查询语句": "(country=\"JP\" && app=\"HIKVISION\")"
+    },
+    {
+      "题号": "M023-S002",
+      "查询语句": "(domain=\"163.com\" && host*=\"?.?.163.com\")"
+    },
+    {
+      "题号": "M024-S005",
+      "查询语句": "product.version=\"10.0.0\""
+    },
+    {
+      "题号": "M025-S010",
+      "查询语句": "category=\"Middleware\""
+    },
+    {
+      "题号": "M026-S002",
+      "查询语句": "body=\"NoSuchUpload\""
+    },
+    {
+      "题号": "M027-S008",
+      "查询语句": "header=\"Content-Security-Policy-Report-Only\""
+    },
+    {
+      "题号": "M028-S011",
+      "查询语句": "status_code=\"308\""
+    },
+    {
+      "题号": "M029-S010",
+      "查询语句": "banner=\"SSH-2.0-OpenSSH_6.1\""
+    },
+    {
+      "题号": "M030-S003",
+      "查询语句": "header=\"Set-Cookie:PHPSESSID\""
+    },
+    {
+      "题号": "M031-S009",
+      "查询语句": "js_name=\"jquery.min.js\""
+    },
+    {
+      "题号": "M032-S010",
+      "查询语句": "(country=\"NL\" && city=\"Amsterdam\" && port=\"554\" && banner=\"200 OK\")"
+    },
+    {
+      "题号": "M033-S003",
+      "查询语句": "(cert.issuer.org=\"GlobalSign\" && cert.is_expired=\"false\")"
+    },
+    {
+      "题号": "M034-S007",
+      "查询语句": "(is_domain=\"true\" && cert.subject.cn=\"apple.com\" && domain!=\"apple.com\")"
+    },
+    {
+      "题号": "M035-S010",
+      "查询语句": "cert=\"TrustAsia\""
+    },
+    {
+      "题号": "M036-S007",
+      "查询语句": "cert.subject.org=\"Alibaba\""
+    },
+    {
+      "题号": "M037-S008",
+      "查询语句": "(domain=\"sohu.com\" && banner!=\"\" && banner!=\"apache\")"
+    },
+    {
+      "题号": "M038-S009",
+      "查询语句": "cert.domain=\"adobe.com\""
+    },
+    {
+      "题号": "M039-S001",
+      "查询语句": "cert.subject.cn=\"qq.com\""
+    },
+    {
+      "题号": "M040-S011",
+      "查询语句": "(cert=\"godaddy\" && domain!=\"godaddy.com\")"
+    },
+    {
+      "题号": "M041-S001",
+      "查询语句": "(cert=\"google.com\" && is_honeypot=\"false\" && is_fraud=\"false\")"
+    },
+    {
+      "题号": "M042-S003",
+      "查询语句": "(cert.subject.cn=\"example.com\" || cert.domain=\"example.com\")"
+    },
+    {
+      "题号": "M043-S004",
+      "查询语句": "(tls.version=\"TLS 1.0\" && cert.is_expired=\"false\")"
+    },
+    {
+      "题号": "M044-S007",
+      "查询语句": "(jarm=\"21d21d00021d21d00021d21d21d21dce319294781f0e12867fd06896a000ea\" && status_code=\"307\" && header=\"Content-Length: 0\")"
+    },
+    {
+      "题号": "M045-S001",
+      "查询语句": "os=\"Linux\""
+    },
+    {
+      "题号": "M046-S013",
+      "查询语句": "(country=\"CN\" && type=\"subdomain\" && is_domain=\"false\")"
+    },
+    {
+      "题号": "M047-S011",
+      "查询语句": "cert.is_equal=\"false\""
+    },
+    {
+      "题号": "M048-S001",
+      "查询语句": "(country=\"CA\" && cert.is_match=\"false\")"
+    },
+    {
+      "题号": "M049-S010",
+      "查询语句": "(country=\"TR\" && tls.ja3s=\"f4febc55ea12b31ae17cfb7e614afda8\")"
+    },
+    {
+      "题号": "M050-S004",
+      "查询语句": "org=\"Inc\""
+    },
+    {
+      "题号": "M051-S001",
+      "查询语句": "(country=\"US\" && org=\"OVH SAS\" && port=\"2087\" && title==\"WHM 登录\")"
+    },
+    {
+      "题号": "M052-S002",
+      "查询语句": "(domain*=\"*.io\" && app=\"WordPress\")"
+    },
+    {
+      "题号": "M053-S009",
+      "查询语句": "(city=\"Xiamen\" && port=\"80\" && status_code=\"200\")"
+    },
+    {
+      "题号": "M054-S009",
+      "查询语句": "(country=\"GB\" && org=\"DigitalOcean\" && body=\"/api/show\")"
+    },
+    {
+      "题号": "M055-S003",
+      "查询语句": "(country=\"CN\" && header=\"Set-Cookie\" && body=\"/admin\")"
+    },
+    {
+      "题号": "M056-S008",
+      "查询语句": "(domain=\"baidu.com\" && (body=\"Login\" || body=\"admin\" || body=\"Dashboard\" || body=\"管理\" || header=\"Set-Cookie\"))"
+    },
+    {
+      "题号": "M057-S012",
+      "查询语句": "(ip=\"13.0.0.0/8\" && status_code=\"200\" && (body=\"Welcome\" || body=\"Sign in\" || body=\"Dashboard\"))"
+    },
+    {
+      "题号": "M058-S012",
+      "查询语句": "(country=\"DE\" && (host=\"amazonaws.com\" || domain=\"amazonaws.com\" || cname_domain=\"amazonaws.com\" || cert=\"amazonaws.com\" || cert.domain=\"amazonaws.com\"))"
+    },
+    {
+      "题号": "M059-S006",
+      "查询语句": "(port=\"143\" && cert.sn=\"1\" && (cert=\"TAK\" || cert=\"ATAK\" || cert=\"WinTAK\" || cert=\"Squad\" || cert=\"CoT\"))"
+    },
+    {
+      "题号": "M060-S010",
+      "查询语句": "(ip=\"113.247.228.0/24\" && (port=\"80\" || port=\"443\" || port=\"8080\" || port=\"8443\"))"
+    },
+    {
+      "题号": "M061-S005",
+      "查询语句": "(port=\"80\" && is_ipv6=\"false\" && (title=\"Sign in\" || title=\"Login\"))"
+    },
+    {
+      "题号": "M062-S010",
+      "查询语句": "(country=\"NZ\" && is_cloud=\"true\" && (port=\"80\" || port=\"443\"))"
+    },
+    {
+      "题号": "M063-S001",
+      "查询语句": "((banner=\"IIS\" && banner=\"1.\") || header=\"IIS\")"
+    },
+    {
+      "题号": "M064-S004",
+      "查询语句": "(country=\"JP\" && is_domain=\"true\" && port=\"443\" && status_code=\"200\" && cert.is_valid=\"true\" && (title=\"大学\" || title=\"学部\" || title=\"研究\" || body=\"入学案内\" || body=\"学生\"))"
+    },
+    {
+      "题号": "M065-S004",
+      "查询语句": "(domain=\"baidu.com\" && (title=\"系统\" || title=\"平台\" || title=\"登录\" || title=\"管理\" || title=\"API\" || host=\"api\" || host=\"admin\" || host=\"dev\" || host=\"test\" || host=\"uat\" || host=\"pre\"))"
+    },
+    {
+      "题号": "M066-S006",
+      "查询语句": "(category=\"Mail\" && title=\"Mail\" && country!=\"US\")"
+    },
+    {
+      "题号": "M067-S008",
+      "查询语句": "(country=\"CN\" && country!=\"HK\" && country!=\"MO\" && country!=\"TW\" && port=\"8888\")"
+    },
+    {
+      "题号": "M068-S005",
+      "查询语句": "(body=\"Jenkins\" && title!=\"Jenkins\")"
+    },
+    {
+      "题号": "M069-S001",
+      "查询语句": "(country=\"TW\" && asn=\"20940\" && port=\"443\" && tls.version=\"TLS 1.3\" && cert.issuer.org!=\"Let's Encrypt\" && cert.issuer.org!=\"ZeroSSL\")"
+    },
+    {
+      "题号": "M070-S003",
+      "查询语句": "(app=\"HFS\" && status_code=\"200\" && title==\"HFS /\" && country!=\"JP\" && cloud_name!=\"Amazon AWS\")"
+    },
+    {
+      "题号": "M071-S006",
+      "查询语句": "(country=\"CN\" && country!=\"HK\" && country!=\"MO\" && country!=\"TW\" && app=\"Grafana\")"
+    },
+    {
+      "题号": "M072-S008",
+      "查询语句": "(domain*=\"*.edu.ar\" && (port=\"80\" || port=\"443\") && server!=\"nginx\" && server!=\"WAF\")"
+    },
+    {
+      "题号": "M073-S003",
+      "查询语句": "(ip=\"1.1.1.1\" && is_domain=\"true\")"
+    },
+    {
+      "题号": "M074-S008",
+      "查询语句": "(cert.domain=\"aliyun.com\" && cert.is_valid=\"true\" && is_domain=\"false\")"
+    },
+    {
+      "题号": "M075-S006",
+      "查询语句": "(country=\"CN\" && is_domain=\"true\" && header=\"x-qiniu-zone\" && domain!=\"qiniudn.com\")"
+    },
+    {
+      "题号": "M076-S004",
+      "查询语句": "(title=\"\" && status_code=\"200\" && fid!=\"\" && icon_hash!=\"\" && domain*=\"*admin*\" && (domain*=\"*.cn\" || domain*=\"????.com\"))"
+    },
+    {
+      "题号": "M077-S009",
+      "查询语句": "body=\"class=\\\"container\\\"\""
+    },
+    {
+      "题号": "M078-S009",
+      "查询语句": "body=\"\\\"exception\\\": \\\"Symfony\\\\Component\\\\ErrorHandler\\\\Error\\\\FatalError\\\"\""
+    },
+    {
+      "题号": "M079-S006",
+      "查询语句": "ip=\"40.88.0.0/16\""
+    },
+    {
+      "题号": "M080-S006",
+      "查询语句": "((ip=\"47.96.0.1\" || ip=\"47.96.0.2\" || ip=\"47.96.0.3\" || ip=\"47.96.0.4\" || ip=\"47.96.0.5\") && (port=\"80\" || port=\"443\"))"
+    },
+    {
+      "题号": "M081-S011",
+      "查询语句": "(app=\"Grafana\" && ((header_hash!=\"\" && body_hash!=\"\") || (header_hash!=\"\" && icon_hash!=\"\") || (header_hash!=\"\" && fid!=\"\") || (body_hash!=\"\" && icon_hash!=\"\") || (body_hash!=\"\" && fid!=\"\") || (icon_hash!=\"\" && fid!=\"\")))"
+    },
+    {
+      "题号": "M082-S001",
+      "查询语句": "(cert.is_match=\"true\" && cert.is_valid=\"true\" && cert.not_after.after=\"2024-01-01 00:00:00\" && cert.not_after.before=\"2026-08-30 18:17:49\" && (domain=\"kuaihuoyun.com\" || cert.domain=\"kuaihuoyun.com\" || domain=\"wlhyos.cn\" || cert.domain=\"wlhyos.cn\" || domain=\"wlhyos.com\" || cert.domain=\"wlhyos.com\" || domain=\"56ctms.com\" || cert.domain=\"56ctms.com\" || domain=\"xiaokuaikeji.com\" || cert.domain=\"xiaokuaikeji.com\" || domain=\"zhihuiwuliu.org.cn\" || cert.domain=\"zhihuiwuliu.org.cn\"))"
+    },
+    {
+      "题号": "M083-S008",
+      "查询语句": "(header=\"Server: nginx\" && title=\"Welcome\")"
+    },
+    {
+      "题号": "M084-S004",
+      "查询语句": "(title=\"Grafana\" && body=\"JavaScript\")"
+    },
+    {
+      "题号": "M085-S001",
+      "查询语句": "(body=\"login\" && (domain*=\"*bet*\" || domain*=\"*casino*\" || domain*=\"*kasino*\"))"
+    },
+    {
+      "题号": "M086-S006",
+      "查询语句": "(domain*=\"*google*\" && domain!=\"google.com\" && title=\"\")"
+    },
+    {
+      "题号": "M087-S009",
+      "查询语句": "(header=\"Server: Tengine\" || header=\"X-Cache: MISS\")"
+    },
+    {
+      "题号": "M088-S004",
+      "查询语句": "(asn!=\"4134\" && country=\"HK\" && server==\"Apache\")"
+    },
+    {
+      "题号": "M089-S010",
+      "查询语句": "((app=\"HFS\" && port=\"80\") || (app=\"HFS\" && port=\"8080\" && status_code=\"200\"))"
+    },
+    {
+      "题号": "M090-S008",
+      "查询语句": "(header=\"Accept-Ranges\" && header=\"Cache-Control\" && header=\"Content-Type\" && header=\"Date\" && header=\"Last-Modified\" && header=\"Server\" && header=\"Vary\" && header=\"Content-Length: 1171\" && header=\"Etag: \\\"6aa522a3-493\\\"\")"
+    },
+    {
+      "题号": "M091-S009",
+      "查询语句": "该需求不能直接转换为FOFA搜索语句"
+    },
+    {
+      "题号": "M092-S007",
+      "查询语句": "该需求不能直接转换为FOFA搜索语句"
+    },
+    {
+      "题号": "M093-S004",
+      "查询语句": "该需求不能直接转换为FOFA搜索语句"
+    },
+    {
+      "题号": "M094-S004",
+      "查询语句": "该需求不能直接转换为FOFA搜索语句"
+    },
+    {
+      "题号": "M095-S010",
+      "查询语句": "该需求不能直接转换为FOFA搜索语句"
+    },
+    {
+      "题号": "M096-S001",
+      "查询语句": "(body=\"Jenkins-Agent-Protocols\" || banner=\"Jenkins-Agent-Protocols\" || body=\"Jenkins-Version\" || banner=\"Jenkins-Version\" || body=\"Jenkins-Session\" || banner=\"Jenkins-Session\" || body=\"Remoting-Minimum-Version\" || banner=\"Remoting-Minimum-Version\")"
+    },
+    {
+      "题号": "M097-S001",
+      "查询语句": "icon_hash=\"-1493334710\""
+    },
+    {
+      "题号": "M098-S001",
+      "查询语句": "is_fraud=\"true\""
+    },
+    {
+      "题号": "M099-S001",
+      "查询语句": "(app=\"Apache\" && product.version=\"2.4.49\")"
+    },
+    {
+      "题号": "M100-S001",
+      "查询语句": "(cert.issuer.cn=\"ZeroSSL ECC DV SSL CA 2\" && cert.sn=\"132577581667764526475870473477991557894\")"
+    }
+  ]
+}

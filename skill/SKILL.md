@@ -41,7 +41,7 @@ python3 skill/scripts/convert.py --题目 docs/题目.txt --输出 skill/tests/c
 
 ```bash
 python3 skill/scripts/build_answers.py
-python3 skill/scripts/validate.py skill/answers/答案.json --参赛包编号 pkg-08e82c8d
+python3 skill/scripts/validate.py skill/answers/答案.json
 ```
 
 `build_answers.py` 产出答卷、golden 快照和待确认清单；`validate.py` 在上传前做最后一道格式校验，**不通过就不要提交**。
@@ -90,12 +90,17 @@ ln -sfn "$(pwd)/skill" ~/.codex/skills/fofa-query-builder
 题目固定取 `<工作区>/docs/题目.txt`；答卷默认写 `<仓库>/skill/answers/答案.json`，
 拷贝形态写 `<工作区>/answers/答案.json`。换参赛包、换题目文件时传 `--题目` 覆盖，
 不必改脚本。
+方案要求单独出一份答卷时，用 `--输出 <路径>` 指定落点：
+
+```bash
+python3 skill/scripts/build_answers.py --输出 test/答案.json
+```
 
 ## 红线
 
 - `rules/` 是持续维护的权威规则源，**只读**。字段表以 `rules/3.txt` 为准。
 - `docs/` 是题目与提交规范，**只读**。
-- `test/` 目录归用户管理，不要往里写。
+- `test/` 目录归用户管理，除用户明确指定输出位置外，不要往里写。
 - 不要为了让题目"有答案"而编造字段或放宽条件。
 
 ## 新建或更新 Skill 后必做
