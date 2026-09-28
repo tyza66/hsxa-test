@@ -173,7 +173,7 @@ func ask(ctx context.Context, chat *service.ChatService, prompt string, out io.W
 		}
 
 		for _, tc := range chunk.ToolCalls {
-			if tc.Function.Name == "" && tc.Arguments == "" {
+			if tc.Function.Name == "" && tc.Function.Arguments == "" {
 				continue
 			}
 			fmt.Fprintf(out, "\n[tool] %s(%s)\n", tc.Function.Name, tc.Function.Arguments)

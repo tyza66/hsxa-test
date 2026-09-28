@@ -15,8 +15,8 @@ const maxBodyBytes = 1 << 20
 
 // sseEvent 是流式响应中每条 SSE 事件的载荷。
 type sseEvent struct {
-	Type     string           `json:"type"` // delta | tool_call | error | done
-	Content  string           `json:"content,omitempty"`
+	Type     string            `json:"type"` // delta | tool_call | error | done
+	Content  string            `json:"content,omitempty"`
 	ToolCall *service.ToolCall `json:"tool_call,omitempty"`
 	Usage    *service.Usage    `json:"usage,omitempty"`
 }
@@ -38,9 +38,9 @@ func writeError(w http.ResponseWriter, status int, err error) {
 	writeJSON(w, status, map[string]string{"error": err.Error()})
 }
 
-// decodeJSON 解析请求体。
-func decodeJSON(r *http.Request, dst any) error {
-	body := http.MaxBytesReader(nil, r.Body, maxBodyBytes)
+// decodeJSON 解析请求体，超长时由 MaxBytesReader 通过 w 终止连接。
+func decodeJSON(w http.ResponseWriter, r *http.Request, dst any) error {
+	body := http.MaxBytesReader(w, r.Body, maxBodyBytes)
 	if err := json.NewDecoder(body).Decode(dst); err != nil {
 		return fmt.Errorf("请求体解析失败: %w", err)
 	}
@@ -69,7 +69,7 @@ func (s *Server) handleTools(w http.ResponseWriter, r *http.Request) {
 // handleChat 非流式对话。
 func (s *Server) handleChat(w http.ResponseWriter, r *http.Request) {
 	var req service.ChatRequest
-	if err := decodeJSON(r, &req); err != nil {
+	if err := decodeJSON(w, r, &req); err != nil {
 		writeError(w, http.StatusBadRequest, err)
 		return
 	}
@@ -95,7 +95,7 @@ func (s *Server) handleChatStream(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var req service.ChatRequest
-	if err := decodeJSON(r, &req); err != nil {
+	if err := decodeJSON(w, r, &req); err != nil {
 		writeError(w, http.StatusBadRequest, err)
 		return
 	}

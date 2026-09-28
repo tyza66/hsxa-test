@@ -105,7 +105,9 @@ func (e *Engine) HasAgent() bool {
 // Generate 非流式生成，启用智能体时走智能体链路，否则直接调用 ChatModel。
 func (e *Engine) Generate(ctx context.Context, messages []*schema.Message, opts ...model.Option) (*schema.Message, error) {
 	if e.agent != nil {
-		return e.agent.Generate(ctx, messages, opts...)
+		// react.Agent 只认 agent.AgentOption，模型侧参数需要显式包一层
+		// 才能透传到智能体内部的 ChatModel 节点。
+		return e.agent.Generate(ctx, messages, react.WithChatModelOptions(opts...))
 	}
 	return e.chat.Generate(ctx, messages, opts...)
 }
@@ -113,7 +115,8 @@ func (e *Engine) Generate(ctx context.Context, messages []*schema.Message, opts 
 // Stream 流式生成，返回的 StreamReader 由调用方负责关闭。
 func (e *Engine) Stream(ctx context.Context, messages []*schema.Message, opts ...model.Option) (*schema.StreamReader[*schema.Message], error) {
 	if e.agent != nil {
-		return e.agent.Stream(ctx, messages, opts...)
+		// 同 Generate：模型侧参数经 WithChatModelOptions 转换为智能体选项。
+		return e.agent.Stream(ctx, messages, react.WithChatModelOptions(opts...))
 	}
 	return e.chat.Stream(ctx, messages, opts...)
 }
