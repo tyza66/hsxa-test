@@ -52,6 +52,7 @@ func (s *Server) handleHealth(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, http.StatusOK, map[string]any{
 		"status": "ok",
 		"agent":  s.chat.AgentEnabled(),
+		"fofa":   s.fofa != nil,
 	})
 }
 
@@ -64,6 +65,34 @@ func (s *Server) handleTools(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	writeJSON(w, http.StatusOK, map[string]any{"tools": tools})
+}
+
+// handleFofa 跑 FOFA 链路，把自然语言需求转成结构化答案。
+//
+// 入参缺问题是调用方错误（400），链路自身失败是上游问题（502）。
+func (s *Server) handleFofa(w http.ResponseWriter, r *http.Request) {
+	if s.fofa == nil {
+		writeError(w, http.StatusNotFound, errors.New("FOFA 链路未装载"))
+		return
+	}
+
+	var req service.FofaRequest
+	if err := decodeJSON(w, r, &req); err != nil {
+		writeError(w, http.StatusBadRequest, err)
+		return
+	}
+
+	answer, err := s.fofa.Convert(r.Context(), &req)
+	if err != nil {
+		status := http.StatusBadGateway
+		if errors.Is(err, service.ErrEmptyQuestion) {
+			status = http.StatusBadRequest
+		}
+		s.logger.ErrorContext(r.Context(), "FOFA 链路执行失败", "error", err)
+		writeError(w, status, err)
+		return
+	}
+	writeJSON(w, http.StatusOK, answer)
 }
 
 // handleChat 非流式对话。

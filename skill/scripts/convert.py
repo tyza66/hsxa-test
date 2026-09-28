@@ -529,7 +529,8 @@ def main(argv):
             return 1
         print(query)
         print("置信度: %s  说明: %s" % (conf, note))
-        issues = lookup.lint(query)
+        # 固定答案表示“此题无解”，不是真实查询语句，跳过语法体检（否则必然误报）
+        issues = [] if query == lookup.FIXED_ANSWER else lookup.lint(query)
         if issues:
             print("语法体检未通过: " + "; ".join(issues))
             return 1

@@ -59,8 +59,34 @@ Skill 的形态也正好对症：把"哪个说法对应哪个字段、什么情�
 
 eino 骨架已经跑通：`go build` / `go vet` / `go test` 全过，`AGENT_ENABLED=true`
 下 CLI（serve/chat/tools）与 HTTP 冒烟、超限请求 400、优雅停机都验证过。
-但**"索引 Skill 知识库"还没接上**，当前工具只有 current_time，知识库那一步
-要等真实模型凭据联调。真正的主线成果始终是 Skill 和那份答卷。
+随之把**"索引 Skill 知识库"也接上了**，当前形态：
+
+- **知识库索引**：`SKILL.md` 与 `reference/` 的判据文档按 `##` 切成 40 个块，
+  做 BM25 关键词检索（中文单字加二元滑窗，英文数字按连续串切）。选关键词
+  而不是向量，是因为当前没有可用的 embedding 凭据，且判据总量只有几百行，
+  关键词检索确定性可复现；索引按 eino 的 `retriever.Retriever` 实现，日后
+  有凭据换成向量检索时上层不用动。
+- **Skill 桥接**：`convert.py` 与 `lookup.py lint` 以子进程调用，把退出码和
+  输出前缀当契约解析，Go 侧**不做第二套判据**，避免两套逻辑各自漂移。
+- **链式编排**：prepare（检索知识、机械层先试一次）→ route（三分支）→ 收口。
+  机械层能直译就直接收口；机械层拒绝且有模型凭据才走模型判据；两者都没有就
+  返回固定答案。模型候选必须过 Skill 语法体检，不过就改判固定答案并留档。
+- **新增工具**：`fofa_convert`（自然语言转语句）与 `fofa_knowledge`（查判据），
+  和 `current_time` 一起挂在引擎上。
+- **两个出入口**：CLI `hsxa fofa "<需求>"` 与 HTTP `POST /v1/fofa`，
+  输出与 Skill 答卷同构的 JSON（问题、查询语句、置信度、说明、来源、知识依据）。
+- **无凭据可跑**：没有模型凭据时机械层照常工作，命令行即可验证，例如
+  `go run ./cmd/hsxa fofa "请查询 IP 地址为 20.247.40.92 的资产。"`。
+
+验证上，`gofmt` / `go build` / `go vet` / `go test` 全过；`internal/fofa` 与
+`internal/engine` 的测试直接调用 Python 桥，把 convert/lint 的输出契约、
+三个分支的收口行为、引号剥除、分词约定都钉死了。测试还翻出并修掉三处暗病：
+`convert.py` 单句模式把固定答案也送进语法体检，必然误报体检失败；Go 侧
+`runScript` 把退出码初值设成 -1，成功的调用全被当成异常退出；`extractQuery`
+无脑 Trim 首尾引号，把 `ip="1.1.1.1"` 咬成少个收尾引号的坏语句再被体检误杀。
+
+残余风险：模型判据分支目前只有假模型单测，真实凭据下的联调没做过；FOFA 官网
+的 Playwright 回归还没做。真正的主线成果始终是 Skill 和那份答卷。
 
 ## 更佳方案（没走的两条）
 
@@ -131,6 +157,9 @@ eino 骨架已经跑通：`go build` / `go vet` / `go test` 全过，`AGENT_ENAB
   `skill/answers/答案.json` 逐字节一致，可直接拿去提交。
 - 回归入口：`python3 skill/tests/regress.py`，两组 selftest 加三份交付物
   逐字节可复现校验，全绿才算完成。
+- Go Agent（eino 链式）也已实现：CLI `hsxa fofa "<需求>"` 与
+  `POST /v1/fofa` 可用，无模型凭据时机械层独立运行；验收要求
+  `go test ./...` 与 `python3 skill/tests/regress.py` 两条都绿，细节见第五节。
 
 ## 验证语句
 
@@ -138,3 +167,12 @@ Skill 装好之后，在客户端里 @ 一下就能直接驱动，不需要记�
 这次 `test/答案.json` 就是发出下面这一行之后，沿着 Skill 的三步流程跑出来的：
 
 ![在客户端 @ 调用 fofa-query-builder Skill 并指定答卷输出位置](assets/fofa-skill-invocation.png)
+
+Go Agent 侧还有一条等价的命令行验证，不依赖模型凭据，走的是同一条链路：
+
+```bash
+go run ./cmd/hsxa fofa "请查询 IP 地址为 20.247.40.92 的资产。"
+```
+
+机械层不处理的需求（如"帮我查最安全的网站。"）在没有模型凭据时会返回固定
+答案并说明原因；配上模型凭据后才交给模型判据。

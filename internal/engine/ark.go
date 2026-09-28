@@ -48,3 +48,12 @@ func newArkChatModel(ctx context.Context, cfg *config.ModelConfig) (model.ToolCa
 	}
 	return cm, nil
 }
+
+// NewChatModel 按配置创建 ChatModel，供没有完整引擎的场景使用
+// （例如 hsxa fofa 子命令只为链路建一个模型）。
+func NewChatModel(ctx context.Context, cfg *config.ModelConfig) (model.ToolCallingChatModel, error) {
+	if cfg == nil {
+		return nil, fmt.Errorf("engine: 模型配置为 nil")
+	}
+	return newChatModel(ctx, cfg)
+}

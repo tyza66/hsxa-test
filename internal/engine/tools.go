@@ -11,6 +11,8 @@ import (
 	"github.com/cloudwego/eino/components/tool"
 	toolutils "github.com/cloudwego/eino/components/tool/utils"
 	"github.com/cloudwego/eino/schema"
+
+	"github.com/tyza66/hsxa-test/internal/fofa"
 )
 
 // currentTimeInput 是 current_time 工具的入参 schema，
@@ -29,12 +31,21 @@ type timeReport struct {
 }
 
 // newTools 返回引擎暴露给模型的工具集合。
-func newTools() ([]tool.BaseTool, error) {
+// bundle 非 nil 时追加 FOFA 的 Skill 工具，nil 表示该链路未装载。
+func newTools(bundle *fofa.Bundle) ([]tool.BaseTool, error) {
 	currentTime, err := newCurrentTimeTool()
 	if err != nil {
 		return nil, err
 	}
-	return []tool.BaseTool{currentTime}, nil
+	tools := []tool.BaseTool{currentTime}
+	if bundle != nil {
+		fofaTools, err := fofa.NewTools(bundle)
+		if err != nil {
+			return nil, fmt.Errorf("engine: 装载 FOFA 工具失败: %w", err)
+		}
+		tools = append(tools, fofaTools...)
+	}
+	return tools, nil
 }
 
 // newCurrentTimeTool 返回一个返回当前时间的工具。

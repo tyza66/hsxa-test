@@ -24,22 +24,28 @@ type Config struct {
 type Server struct {
 	cfg     Config
 	chat    *service.ChatService
+	fofa    *service.FofaService // 非 nil 时才注册 FOFA 路由
 	logger  *slog.Logger
 	httpSrv *http.Server
 }
 
 // New 构造 HTTP 服务并注册路由。
-func New(cfg Config, chat *service.ChatService, logger *slog.Logger) *Server {
+//
+// fofa 传 nil 表示 FOFA 链路未装载，此时 /v1/fofa 不会注册。
+func New(cfg Config, chat *service.ChatService, fofa *service.FofaService, logger *slog.Logger) *Server {
 	if logger == nil {
 		logger = slog.Default()
 	}
-	s := &Server{cfg: cfg, chat: chat, logger: logger}
+	s := &Server{cfg: cfg, chat: chat, fofa: fofa, logger: logger}
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("GET /healthz", s.handleHealth)
 	mux.HandleFunc("GET /v1/tools", s.handleTools)
 	mux.HandleFunc("POST /v1/chat", s.handleChat)
 	mux.HandleFunc("POST /v1/chat/stream", s.handleChatStream)
+	if fofa != nil {
+		mux.HandleFunc("POST /v1/fofa", s.handleFofa)
+	}
 
 	s.httpSrv = &http.Server{
 		Addr:         cfg.Addr,

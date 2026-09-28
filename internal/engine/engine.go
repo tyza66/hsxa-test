@@ -15,6 +15,7 @@ import (
 	"github.com/cloudwego/eino/schema"
 
 	"github.com/tyza66/hsxa-test/internal/config"
+	"github.com/tyza66/hsxa-test/internal/fofa"
 )
 
 // Engine 是服务的对话引擎，内部持有 eino 的模型、工具与智能体实例。
@@ -29,7 +30,10 @@ type Engine struct {
 }
 
 // New 构建引擎：注册回调、创建 ChatModel、装配工具，并按需构建 ReAct 智能体。
-func New(ctx context.Context, cfg *config.Config, logger *slog.Logger) (*Engine, error) {
+//
+// bundle 非 nil 时，FOFA 的 Skill 工具会一并注册给模型；
+// 传 nil 表示这条链路不可用，引擎退化为纯对话。
+func New(ctx context.Context, cfg *config.Config, logger *slog.Logger, bundle *fofa.Bundle) (*Engine, error) {
 	if cfg == nil {
 		return nil, errors.New("engine: 配置为 nil")
 	}
@@ -45,7 +49,7 @@ func New(ctx context.Context, cfg *config.Config, logger *slog.Logger) (*Engine,
 		return nil, err
 	}
 
-	tools, err := newTools()
+	tools, err := newTools(bundle)
 	if err != nil {
 		return nil, err
 	}
@@ -84,12 +88,23 @@ func New(ctx context.Context, cfg *config.Config, logger *slog.Logger) (*Engine,
 		)
 	}
 
+	if bundle != nil {
+		logger.InfoContext(ctx, "FOFA Skill 工具已注册",
+			"total_tools", len(tools),
+		)
+	}
+
 	return e, nil
 }
 
 // ChatModel 返回已绑定工具、可直接使用的 ChatModel。
 func (e *Engine) ChatModel() model.ToolCallingChatModel {
 	return e.chat
+}
+
+// BaseChatModel 返回未绑定工具的原始模型，供 FOFA 链路等对工具有特殊要求的场景复用。
+func (e *Engine) BaseChatModel() model.ToolCallingChatModel {
+	return e.base
 }
 
 // Tools 返回引擎暴露给模型的工具集合。

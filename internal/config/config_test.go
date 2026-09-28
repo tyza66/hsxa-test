@@ -14,6 +14,8 @@ func clearEnv(t *testing.T) {
 		"MODEL_BASE_URL", "MODEL_REGION", "MODEL_TEMPERATURE", "MODEL_TOP_P", "MODEL_MAX_TOKENS",
 		"MODEL_RETRY_TIMES", "MODEL_TIMEOUT",
 		"AGENT_ENABLED", "AGENT_MAX_STEP", "AGENT_PERSONA",
+		"FOFA_SKILL_DIR", "FOFA_PYTHON", "FOFA_SCRIPT_TIMEOUT",
+		"FOFA_KNOWLEDGE_TOPK", "FOFA_PERSONA",
 	} {
 		t.Setenv(k, "")
 	}
@@ -56,6 +58,15 @@ func TestLoadDefaults(t *testing.T) {
 	if cfg.Server.WriteTimeout != 10*time.Minute {
 		t.Errorf("SERVER_WRITE_TIMEOUT 默认值=%v", cfg.Server.WriteTimeout)
 	}
+	if cfg.Fofa.Python != DefaultFofaPython {
+		t.Errorf("FOFA_PYTHON 默认值=%q", cfg.Fofa.Python)
+	}
+	if cfg.Fofa.ScriptTimeout != DefaultFofaScriptTimeout {
+		t.Errorf("FOFA_SCRIPT_TIMEOUT 默认值=%v", cfg.Fofa.ScriptTimeout)
+	}
+	if cfg.Fofa.KnowledgeTopK != DefaultFofaKnowledgeTopK {
+		t.Errorf("FOFA_KNOWLEDGE_TOPK 默认值=%d", cfg.Fofa.KnowledgeTopK)
+	}
 }
 
 func TestLoadMissingModelName(t *testing.T) {
@@ -94,6 +105,64 @@ func TestLoadBadPort(t *testing.T) {
 
 	if _, err := Load(); err == nil {
 		t.Fatal("SERVER_PORT 超出范围时应报错")
+	}
+}
+
+// FOFA 子命令只依赖 Skill 脚本，没有模型变量也必须能加载配置。
+func TestLoadForFofaWithoutModel(t *testing.T) {
+	clearEnv(t)
+
+	cfg, err := LoadForFofa()
+	if err != nil {
+		t.Fatalf("无模型变量时 LoadForFofa 应通过，得到: %v", err)
+	}
+	if cfg.ModelUsable() {
+		t.Error("没有模型凭据时 ModelUsable 应为 false")
+	}
+	// 严格入口仍然应拒绝同样的环境，两个入口行为不能互相渗透。
+	if _, err := Load(); err == nil {
+		t.Fatal("同一个环境走 Load 仍应因缺少模型凭据而报错")
+	}
+}
+
+// FOFA 参数自身残缺时，即使放宽了模型校验也要报错。
+func TestLoadForFofaBadTopK(t *testing.T) {
+	clearEnv(t)
+	t.Setenv("FOFA_KNOWLEDGE_TOPK", "0")
+
+	if _, err := LoadForFofa(); err == nil {
+		t.Fatal("FOFA_KNOWLEDGE_TOPK<=0 时应报错")
+	}
+}
+
+func TestModelUsable(t *testing.T) {
+	base := func() *Config {
+		return &Config{Model: ModelConfig{Provider: ProviderArk, Name: "ep-test"}}
+	}
+	if base().ModelUsable() {
+		t.Error("只有模型名没有任何凭据时 ModelUsable 应为 false")
+	}
+	withKey := base()
+	withKey.Model.APIKey = "sk-test"
+	if !withKey.ModelUsable() {
+		t.Error("有 APIKey 时 ModelUsable 应为 true")
+	}
+	withPair := base()
+	withPair.Model.AccessKey = "ak"
+	withPair.Model.SecretKey = "sk"
+	if !withPair.ModelUsable() {
+		t.Error("AK/SK 成对时 ModelUsable 应为 true")
+	}
+	halfPair := base()
+	halfPair.Model.AccessKey = "ak"
+	if halfPair.ModelUsable() {
+		t.Error("只有 AccessKey 时 ModelUsable 应为 false")
+	}
+	noName := base()
+	noName.Model.Name = "  "
+	noName.Model.APIKey = "sk-test"
+	if noName.ModelUsable() {
+		t.Error("MODEL_NAME 为空时 ModelUsable 应为 false")
 	}
 }
 
