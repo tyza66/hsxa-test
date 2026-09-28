@@ -1,0 +1,502 @@
+{
+  "M001-S009": {
+    "查询语句": "ip=\"20.247.40.92\"",
+    "置信度": "high",
+    "说明": "单个 IPv4"
+  },
+  "M002-S004": {
+    "查询语句": "ip=\"124.255.254.0/24\"",
+    "置信度": "high",
+    "说明": "24 位网段"
+  },
+  "M003-S002": {
+    "查询语句": "domain=\"zendesk.com\"",
+    "置信度": "high",
+    "说明": "主域用 domain"
+  },
+  "M004-S003": {
+    "查询语句": "host=\"www.amazon.com\"",
+    "置信度": "high",
+    "说明": "网站名用 host"
+  },
+  "M005-S004": {
+    "查询语句": "domain*=\"*vpn*\"",
+    "置信度": "high",
+    "说明": "域名包含 vpn"
+  },
+  "M006-S002": {
+    "查询语句": "country=\"GB\"",
+    "置信度": "high",
+    "说明": "英国 -> 国别代码 GB"
+  },
+  "M007-S007": {
+    "查询语句": "(country=\"KR\" && region=\"Gangwon\")",
+    "置信度": "medium",
+    "说明": "江原道英文名取 Gangwon；region 不支持 *=，= 的包含语义可兜底 Gangwon-do 一类写法"
+  },
+  "M008-S009": {
+    "查询语句": "(country=\"DE\" && region=\"Bavaria\" && city=\"Munich\")",
+    "置信度": "medium",
+    "说明": "München -> Munich，Bavaria -> Bayern，均为英文地名待核"
+  },
+  "M009-S008": {
+    "查询语句": "asn=\"4134\"",
+    "置信度": "high",
+    "说明": "自治系统号"
+  },
+  "M010-S009": {
+    "查询语句": "(country=\"NL\" && cloud_name=\"Amazon AWS\")",
+    "置信度": "high",
+    "说明": "亚马逊的云计算/对象存储/应用托管都归 Amazon AWS"
+  },
+  "M011-S005": {
+    "查询语句": "(region=\"Hebei\" && cloud_name=\"Huawei Cloud\")",
+    "置信度": "medium",
+    "说明": "华为云的 cloud_name 取值待核；region 不支持 *=，= 已是包含匹配"
+  },
+  "M012-S009": {
+    "查询语句": "port=\"3000\"",
+    "置信度": "high",
+    "说明": "端口"
+  },
+  "M013-S003": {
+    "查询语句": "(country!=\"CN\" && after=\"2026-08-01\" && (title=\"Jenkins\" || body=\"jenkins\"))",
+    "置信度": "high",
+    "说明": "“不是中国”按字面取 country!=\"CN\""
+  },
+  "M014-S002": {
+    "查询语句": "(country=\"CN\" && protocol=\"dns\")",
+    "置信度": "high",
+    "说明": "DNS 服务用 protocol"
+  },
+  "M015-S001": {
+    "查询语句": "protocol=\"socks5\"",
+    "置信度": "medium",
+    "说明": "SOCKS v5 在 FOFA 里的 protocol 取值待核"
+  },
+  "M016-S006": {
+    "查询语句": "(protocol=\"ssh\" && port=\"22022\")",
+    "置信度": "high",
+    "说明": "协议 + 端口"
+  },
+  "M017-S001": {
+    "查询语句": "base_protocol=\"tcp\"",
+    "置信度": "high",
+    "说明": "传输层协议用 base_protocol"
+  },
+  "M018-S006": {
+    "查询语句": "protocol=\"snmp\"",
+    "置信度": "high",
+    "说明": "SNMP 网络管理服务，不限定端口"
+  },
+  "M019-S010": {
+    "查询语句": "(country=\"US\" && protocol=\"memcached\")",
+    "置信度": "medium",
+    "说明": "memcached 的 protocol 取值待核"
+  },
+  "M020-S005": {
+    "查询语句": "(protocol=\"ftp\" && base_protocol=\"tcp\")",
+    "置信度": "high",
+    "说明": "“真正跑在 TCP 上”= base_protocol=\"tcp\""
+  },
+  "M021-S010": {
+    "查询语句": "(protocol=\"ssh\" && banner=\"OpenSSH_10.4\")",
+    "置信度": "high",
+    "说明": "服务返回信息用 banner"
+  },
+  "M022-S007": {
+    "查询语句": "(country=\"JP\" && app=\"HIKVISION\")",
+    "置信度": "medium",
+    "说明": "海康威视的 app 指纹名待核"
+  },
+  "M023-S002": {
+    "查询语句": "(domain=\"163.com\" && host*=\"?.?.163.com\")",
+    "置信度": "medium",
+    "说明": "host 通配 ? 匹配单字符，构成两级单字符子域"
+  },
+  "M024-S005": {
+    "查询语句": "product.version=\"10.0.0\"",
+    "置信度": "high",
+    "说明": "不限定产品则只查版本"
+  },
+  "M025-S010": {
+    "查询语句": "category=\"Middleware\"",
+    "置信度": "low",
+    "说明": "中间层软件的 category 英文取值为猜测，需实测核对"
+  },
+  "M026-S002": {
+    "查询语句": "body=\"NoSuchUpload\"",
+    "置信度": "high",
+    "说明": "正文包含"
+  },
+  "M027-S008": {
+    "查询语句": "header=\"Content-Security-Policy-Report-Only\"",
+    "置信度": "high",
+    "说明": "响应头包含字段名"
+  },
+  "M028-S011": {
+    "查询语句": "status_code=\"308\"",
+    "置信度": "medium",
+    "说明": "“网站类资产”是否要补 type=\"subdomain\" 待核"
+  },
+  "M029-S010": {
+    "查询语句": "banner=\"SSH-2.0-OpenSSH_6.1\"",
+    "置信度": "medium",
+    "说明": "“响应信息”取 banner，未叠加 protocol"
+  },
+  "M030-S003": {
+    "查询语句": "header=\"Set-Cookie:PHPSESSID\"",
+    "置信度": "medium",
+    "说明": "题目原文无空格；真实 PHP 会话头多为 \"Set-Cookie: PHPSESSID=\"，必要时改拆成两项 AND"
+  },
+  "M031-S009": {
+    "查询语句": "js_name=\"jquery.min.js\"",
+    "置信度": "high",
+    "说明": "引用 JS 用 js_name"
+  },
+  "M032-S010": {
+    "查询语句": "(country=\"NL\" && city=\"Amsterdam\" && port=\"554\" && banner=\"200 OK\")",
+    "置信度": "medium",
+    "说明": "阿姆斯特丹的英文城市名待核"
+  },
+  "M033-S003": {
+    "查询语句": "(cert.issuer.org=\"GlobalSign\" && cert.is_expired=\"false\")",
+    "置信度": "high",
+    "说明": "签发组织 + 未过期"
+  },
+  "M034-S007": {
+    "查询语句": "(is_domain=\"true\" && cert.subject.cn=\"apple.com\" && domain!=\"apple.com\")",
+    "置信度": "medium",
+    "说明": "“域名数据”补 is_domain=true"
+  },
+  "M035-S010": {
+    "查询语句": "cert=\"TrustAsia\"",
+    "置信度": "high",
+    "说明": "证书全文包含"
+  },
+  "M036-S007": {
+    "查询语句": "cert.subject.org=\"Alibaba\"",
+    "置信度": "high",
+    "说明": "持有者组织"
+  },
+  "M037-S008": {
+    "查询语句": "(domain=\"sohu.com\" && banner!=\"\" && banner!=\"apache\")",
+    "置信度": "high",
+    "说明": "banner 非空且不含 apache"
+  },
+  "M038-S009": {
+    "查询语句": "cert.domain=\"adobe.com\"",
+    "置信度": "medium",
+    "说明": "“根域名”落到 cert.domain"
+  },
+  "M039-S001": {
+    "查询语句": "cert.subject.cn=\"qq.com\"",
+    "置信度": "high",
+    "说明": "持有者名称 CN"
+  },
+  "M040-S011": {
+    "查询语句": "(cert=\"godaddy\" && domain!=\"godaddy.com\")",
+    "置信度": "medium",
+    "说明": "“根域名不是”取资产侧 domain，而非 cert.domain"
+  },
+  "M041-S001": {
+    "查询语句": "(cert=\"google.com\" && is_honeypot=\"false\" && is_fraud=\"false\")",
+    "置信度": "high",
+    "说明": "蜜罐与欺诈都排除"
+  },
+  "M042-S003": {
+    "查询语句": "(cert.subject.cn=\"example.com\" || cert.domain=\"example.com\")",
+    "置信度": "medium",
+    "说明": "裸域与子域由 = 的包含语义覆盖"
+  },
+  "M043-S004": {
+    "查询语句": "(tls.version=\"TLS 1.0\" && cert.is_expired=\"false\")",
+    "置信度": "high",
+    "说明": "TLS 版本 + 未过期"
+  },
+  "M044-S007": {
+    "查询语句": "(jarm=\"21d21d00021d21d00021d21d21d21dce319294781f0e12867fd06896a000ea\" && status_code=\"307\" && header=\"Content-Length: 0\")",
+    "置信度": "high",
+    "说明": "三个条件并列"
+  },
+  "M045-S001": {
+    "查询语句": "os=\"Linux\"",
+    "置信度": "medium",
+    "说明": "os 大小写（Linux / linux）待核"
+  },
+  "M046-S013": {
+    "查询语句": "(country=\"CN\" && type=\"subdomain\" && is_domain=\"false\")",
+    "置信度": "medium",
+    "说明": "“网站类资产”补 type=\"subdomain\""
+  },
+  "M047-S011": {
+    "查询语句": "cert.is_equal=\"false\"",
+    "置信度": "high",
+    "说明": "颁发者与持有者不匹配"
+  },
+  "M048-S001": {
+    "查询语句": "(country=\"CA\" && cert.is_match=\"false\")",
+    "置信度": "high",
+    "说明": "证书与域名不匹配"
+  },
+  "M049-S010": {
+    "查询语句": "(country=\"TR\" && tls.ja3s=\"f4febc55ea12b31ae17cfb7e614afda8\")",
+    "置信度": "high",
+    "说明": "JA3S 指纹"
+  },
+  "M050-S004": {
+    "查询语句": "org=\"Inc\"",
+    "置信度": "high",
+    "说明": "网络组织名称包含 Inc"
+  },
+  "M051-S001": {
+    "查询语句": "(country=\"US\" && org=\"OVH SAS\" && port=\"2087\" && title==\"WHM 登录\")",
+    "置信度": "high",
+    "说明": "标题完整等于用 =="
+  },
+  "M052-S002": {
+    "查询语句": "(domain*=\"*.io\" && app=\"WordPress\")",
+    "置信度": "high",
+    "说明": ".io 顶级域 + WordPress"
+  },
+  "M053-S009": {
+    "查询语句": "(city=\"Xiamen\" && port=\"80\" && status_code=\"200\")",
+    "置信度": "medium",
+    "说明": "厦门的英文城市名待核"
+  },
+  "M054-S009": {
+    "查询语句": "(country=\"GB\" && org=\"DigitalOcean\" && body=\"/api/show\")",
+    "置信度": "medium",
+    "说明": "“DigitalOcean 上”取 org，也可试 cloud_name"
+  },
+  "M055-S003": {
+    "查询语句": "(country=\"CN\" && header=\"Set-Cookie\" && body=\"/admin\")",
+    "置信度": "high",
+    "说明": "两类条件并列"
+  },
+  "M056-S008": {
+    "查询语句": "(domain=\"baidu.com\" && (body=\"Login\" || body=\"admin\" || body=\"Dashboard\" || body=\"管理\" || header=\"Set-Cookie\"))",
+    "置信度": "high",
+    "说明": "正文四项或响应头，任意命中"
+  },
+  "M057-S012": {
+    "查询语句": "(ip=\"13.0.0.0/8\" && status_code=\"200\" && (body=\"Welcome\" || body=\"Sign in\" || body=\"Dashboard\"))",
+    "置信度": "high",
+    "说明": "状态码必须，正文三项任一"
+  },
+  "M058-S012": {
+    "查询语句": "(country=\"DE\" && (host=\"amazonaws.com\" || domain=\"amazonaws.com\" || cname_domain=\"amazonaws.com\" || cert=\"amazonaws.com\" || cert.domain=\"amazonaws.com\"))",
+    "置信度": "high",
+    "说明": "访问地址/主域/CNAME 根域/证书全文/证书域名五处任一"
+  },
+  "M059-S006": {
+    "查询语句": "(port=\"143\" && cert.sn=\"1\" && (cert=\"TAK\" || cert=\"ATAK\" || cert=\"WinTAK\" || cert=\"Squad\" || cert=\"CoT\"))",
+    "置信度": "high",
+    "说明": "序列号 + 证书五个关键词任一"
+  },
+  "M060-S010": {
+    "查询语句": "(ip=\"113.247.228.0/24\" && (port=\"80\" || port=\"443\" || port=\"8080\" || port=\"8443\"))",
+    "置信度": "high",
+    "说明": "四个端口任一"
+  },
+  "M061-S005": {
+    "查询语句": "(port=\"80\" && is_ipv6=\"false\" && (title=\"Sign in\" || title=\"Login\"))",
+    "置信度": "high",
+    "说明": "不是 IPv6 用 is_ipv6=false"
+  },
+  "M062-S010": {
+    "查询语句": "(country=\"NZ\" && is_cloud=\"true\" && (port=\"80\" || port=\"443\"))",
+    "置信度": "high",
+    "说明": "“使用了云服务商”= is_cloud=true"
+  },
+  "M063-S001": {
+    "查询语句": "((banner=\"IIS\" && banner=\"1.\") || header=\"IIS\")",
+    "置信度": "high",
+    "说明": "banner 同时两项，或 header 命中"
+  },
+  "M064-S004": {
+    "查询语句": "(country=\"JP\" && is_domain=\"true\" && port=\"443\" && status_code=\"200\" && cert.is_valid=\"true\" && (title=\"大学\" || title=\"学部\" || title=\"研究\" || body=\"入学案内\" || body=\"学生\"))",
+    "置信度": "high",
+    "说明": "五个必填条件 + 标题三项或正文两项"
+  },
+  "M065-S004": {
+    "查询语句": "(domain=\"baidu.com\" && (title=\"系统\" || title=\"平台\" || title=\"登录\" || title=\"管理\" || title=\"API\" || host=\"api\" || host=\"admin\" || host=\"dev\" || host=\"test\" || host=\"uat\" || host=\"pre\"))",
+    "置信度": "high",
+    "说明": "子域名项用 host 包含匹配，pre 一类短词的误命中风险已记录"
+  },
+  "M066-S006": {
+    "查询语句": "(category=\"Mail\" && title=\"Mail\" && country!=\"US\")",
+    "置信度": "low",
+    "说明": "“邮件系统”对应的 category 英文取值为猜测"
+  },
+  "M067-S008": {
+    "查询语句": "(country=\"CN\" && country!=\"HK\" && country!=\"MO\" && country!=\"TW\" && port=\"8888\")",
+    "置信度": "high",
+    "说明": "显式排除港澳台，与 country=\"CN\" 叠加不改变结果"
+  },
+  "M068-S005": {
+    "查询语句": "(body=\"Jenkins\" && title!=\"Jenkins\")",
+    "置信度": "high",
+    "说明": "标题不含同一关键词"
+  },
+  "M069-S001": {
+    "查询语句": "(country=\"TW\" && asn=\"20940\" && port=\"443\" && tls.version=\"TLS 1.3\" && cert.issuer.org!=\"Let's Encrypt\" && cert.issuer.org!=\"ZeroSSL\")",
+    "置信度": "high",
+    "说明": "两个签发组织都排除"
+  },
+  "M070-S003": {
+    "查询语句": "(app=\"HFS\" && status_code=\"200\" && title==\"HFS /\" && country!=\"JP\" && cloud_name!=\"Amazon AWS\")",
+    "置信度": "medium",
+    "说明": "“亚马逊云”取 cloud_name，未用 is_cloud 以免误伤其他云"
+  },
+  "M071-S006": {
+    "查询语句": "(country=\"CN\" && country!=\"HK\" && country!=\"MO\" && country!=\"TW\" && app=\"Grafana\")",
+    "置信度": "high",
+    "说明": "中国但不含港澳台"
+  },
+  "M072-S008": {
+    "查询语句": "(domain*=\"*.edu.ar\" && (port=\"80\" || port=\"443\") && server!=\"nginx\" && server!=\"WAF\")",
+    "置信度": "medium",
+    "说明": "“服务是 Nginx 和 WAF 的不要”取 server 负向匹配"
+  },
+  "M073-S003": {
+    "查询语句": "(ip=\"1.1.1.1\" && is_domain=\"true\")",
+    "置信度": "high",
+    "说明": "已绑定域名用 is_domain=true"
+  },
+  "M074-S008": {
+    "查询语句": "(cert.domain=\"aliyun.com\" && cert.is_valid=\"true\" && is_domain=\"false\")",
+    "置信度": "medium",
+    "说明": "“根域 aliyun.com”取 cert.domain；未绑定域名取 is_domain=false"
+  },
+  "M075-S006": {
+    "查询语句": "(country=\"CN\" && is_domain=\"true\" && header=\"x-qiniu-zone\" && domain!=\"qiniudn.com\")",
+    "置信度": "high",
+    "说明": "主域不是取资产侧 domain"
+  },
+  "M076-S004": {
+    "查询语句": "(title=\"\" && status_code=\"200\" && fid!=\"\" && icon_hash!=\"\" && domain*=\"*admin*\" && (domain*=\"*.cn\" || domain*=\"????.com\"))",
+    "置信度": "high",
+    "说明": "标题为空用 title=\"\"，两个根域形态用通配 OR"
+  },
+  "M077-S009": {
+    "查询语句": "body=\"class=\\\"container\\\"\"",
+    "置信度": "high",
+    "说明": "双引号由 lookup.escape 转义"
+  },
+  "M078-S009": {
+    "查询语句": "body=\"\\\"exception\\\": \\\"Symfony\\\\Component\\\\ErrorHandler\\\\Error\\\\FatalError\\\"\"",
+    "置信度": "high",
+    "说明": "保留双引号与反斜杠，由 lookup.escape 转义"
+  },
+  "M079-S006": {
+    "查询语句": "ip=\"40.88.0.0/16\"",
+    "置信度": "high",
+    "说明": "整个 B 段即 /16"
+  },
+  "M080-S006": {
+    "查询语句": "((ip=\"47.96.0.1\" || ip=\"47.96.0.2\" || ip=\"47.96.0.3\" || ip=\"47.96.0.4\" || ip=\"47.96.0.5\") && (port=\"80\" || port=\"443\"))",
+    "置信度": "high",
+    "说明": "闭区间穷举 + 端口任一"
+  },
+  "M081-S011": {
+    "查询语句": "(app=\"Grafana\" && ((header_hash!=\"\" && body_hash!=\"\") || (header_hash!=\"\" && icon_hash!=\"\") || (header_hash!=\"\" && fid!=\"\") || (body_hash!=\"\" && icon_hash!=\"\") || (body_hash!=\"\" && fid!=\"\") || (icon_hash!=\"\" && fid!=\"\")))",
+    "置信度": "high",
+    "说明": "四项两两组合共 6 组 OR，表达“至少两项有值”"
+  },
+  "M082-S001": {
+    "查询语句": "(cert.is_match=\"true\" && cert.is_valid=\"true\" && cert.not_after.after=\"2024-01-01 00:00:00\" && cert.not_after.before=\"2026-08-30 18:17:49\" && (domain=\"kuaihuoyun.com\" || cert.domain=\"kuaihuoyun.com\" || domain=\"wlhyos.cn\" || cert.domain=\"wlhyos.cn\" || domain=\"wlhyos.com\" || cert.domain=\"wlhyos.com\" || domain=\"56ctms.com\" || cert.domain=\"56ctms.com\" || domain=\"xiaokuaikeji.com\" || cert.domain=\"xiaokuaikeji.com\" || domain=\"zhihuiwuliu.org.cn\" || cert.domain=\"zhihuiwuliu.org.cn\"))",
+    "置信度": "high",
+    "说明": "证书被标记为匹配且有效，过期时间晚于 2024-01-01 00:00:00 且早于 2026-08-30 18:17:49"
+  },
+  "M083-S008": {
+    "查询语句": "(header=\"Server: nginx\" && title=\"Welcome\")",
+    "置信度": "high",
+    "说明": "Shodan 的 http.title 对应 FOFA title；裸关键词按 \"Key: Value\" 归一为 header"
+  },
+  "M084-S004": {
+    "查询语句": "(title=\"Grafana\" && body=\"JavaScript\")",
+    "置信度": "high",
+    "说明": "intitle→title、intext→body"
+  },
+  "M085-S001": {
+    "查询语句": "(body=\"login\" && (domain*=\"*bet*\" || domain*=\"*casino*\" || domain*=\"*kasino*\"))",
+    "置信度": "high",
+    "说明": "urlscan 的 domain 是可注册主域，对应 FOFA domain 模糊匹配；body 不支持 *="
+  },
+  "M086-S006": {
+    "查询语句": "(domain*=\"*google*\" && domain!=\"google.com\" && title=\"\")",
+    "置信度": "high",
+    "说明": "FOFA 无 domain.suffix，排除后缀改用 domain!=；web.title 为空用 title=\"\""
+  },
+  "M087-S009": {
+    "查询语句": "(header=\"Server: Tengine\" || header=\"X-Cache: MISS\")",
+    "置信度": "medium",
+    "说明": "header 不支持 *=，只能用 \"Key: Value\" 子串匹配；HTTP 头名大小写是否归一需抽查"
+  },
+  "M088-S004": {
+    "查询语句": "(asn!=\"4134\" && country=\"HK\" && server==\"Apache\")",
+    "置信度": "high",
+    "说明": "全角引号归一；香港属国家级地区应取 country=\"HK\" 而非 region=\"HK\"；server 精确匹配用 =="
+  },
+  "M089-S010": {
+    "查询语句": "((app=\"HFS\" && port=\"80\") || (app=\"HFS\" && port=\"8080\" && status_code=\"200\"))",
+    "置信度": "high",
+    "说明": "全角引号与全角竖线归一；两组条件各自加括号保证 || 优先级"
+  },
+  "M090-S008": {
+    "查询语句": "(header=\"Accept-Ranges\" && header=\"Cache-Control\" && header=\"Content-Type\" && header=\"Date\" && header=\"Last-Modified\" && header=\"Server\" && header=\"Vary\" && header=\"Content-Length: 1171\" && header=\"Etag: \\\"6aa522a3-493\\\"\")",
+    "置信度": "high",
+    "说明": "状态码不限定；Etag 的引号由 lookup.escape 转义"
+  },
+  "M091-S009": {
+    "查询语句": "该需求不能直接转换为FOFA搜索语句",
+    "置信度": "high",
+    "说明": "端口 1000000 超出 TCP/UDP 合法范围 1-65535，FOFA 无该端口数据"
+  },
+  "M092-S007": {
+    "查询语句": "该需求不能直接转换为FOFA搜索语句",
+    "置信度": "high",
+    "说明": "1.2.3.4.5 不是合法 IPv4，无法解析成地址或网段"
+  },
+  "M093-S004": {
+    "查询语句": "该需求不能直接转换为FOFA搜索语句",
+    "置信度": "high",
+    "说明": "同一记录要求 country=\"US\" 且 country!=\"US\"，逻辑自相矛盾"
+  },
+  "M094-S004": {
+    "查询语句": "该需求不能直接转换为FOFA搜索语句",
+    "置信度": "high",
+    "说明": "“最安全”没有可量化、可在 FOFA 字段上表达的标准"
+  },
+  "M095-S010": {
+    "查询语句": "该需求不能直接转换为FOFA搜索语句",
+    "置信度": "high",
+    "说明": "容器实时内存使用率需要运行时访问权限，FOFA 只有静态资产指纹"
+  },
+  "M096-S001": {
+    "查询语句": "(body=\"Jenkins-Agent-Protocols\" || banner=\"Jenkins-Agent-Protocols\" || body=\"Jenkins-Version\" || banner=\"Jenkins-Version\" || body=\"Jenkins-Session\" || banner=\"Jenkins-Session\" || body=\"Remoting-Minimum-Version\" || banner=\"Remoting-Minimum-Version\")",
+    "置信度": "high",
+    "说明": "以产品名（Jenkins）或 Remoting 开头的四个字段，正文或响应原文任一命中"
+  },
+  "M097-S001": {
+    "查询语句": "icon_hash=\"-1493334710\"",
+    "置信度": "high",
+    "说明": "murmur3_32(base64.encodebytes(favicon))，已用 fofa.info 的文档向量核对"
+  },
+  "M098-S001": {
+    "查询语句": "is_fraud=\"true\"",
+    "置信度": "low",
+    "说明": "“仿冒特征”只能落到 FOFA 的 is_fraud 标签；若要按同一注册局进一步收窄需人工确认"
+  },
+  "M099-S001": {
+    "查询语句": "(app=\"Apache\" && product.version=\"2.4.49\")",
+    "置信度": "medium",
+    "说明": "CVE-2021-41773 对应 Apache HTTP Server；app 指纹名与是否叠加 2.4.50 待核"
+  },
+  "M100-S001": {
+    "查询语句": "(cert.issuer.cn=\"ZeroSSL ECC DV SSL CA 2\" && cert.sn=\"132577581667764526475870473477991557894\")",
+    "置信度": "high",
+    "说明": "证书序号按 cert.sn 要求换算为十进制，运行时实算不自带常量"
+  }
+}
